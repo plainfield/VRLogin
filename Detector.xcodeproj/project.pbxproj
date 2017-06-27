@@ -99,7 +99,7 @@
 				TargetAttributes = {
 					CC2647F81D6A9C2F00C9E5B1 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = YZP52RND5S;
+						DevelopmentTeam = YR86453S8T;
 						LastSwiftMigration = 0810;
 					};
 				};
@@ -262,10 +262,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = YZP52RND5S;
+				DEVELOPMENT_TEAM = YR86453S8T;
 				INFOPLIST_FILE = Detector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.infinityapps.Detector;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mzy.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -275,10 +275,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = YZP52RND5S;
+				DEVELOPMENT_TEAM = YR86453S8T;
 				INFOPLIST_FILE = Detector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.infinityapps.Detector;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mzy.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
