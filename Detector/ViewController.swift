@@ -9,7 +9,7 @@
 import UIKit
 import CoreImage
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     @IBOutlet weak var personPic: UIImageView!
     
     override func viewDidLoad() {
@@ -18,6 +18,58 @@ class ViewController: UIViewController {
         personPic.image = UIImage(named: "face-1")
 
         detect()
+    }
+    
+    @IBAction func btnAlbum(sender: AnyObject) {
+        //判断是否支持要使用的图片库
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            
+            //初始化图片控制器
+            let picker = UIImagePickerController()
+            
+            //设置代理
+            picker.delegate = self
+            
+            //设置媒体类型
+            //picker.mediaTypes = [kUTTypeImage as String,kUTTypeVideo as String]
+            
+            //设置允许编辑
+            picker.allowsEditing = true
+            
+            //指定图片控制器类型
+            picker.sourceType = .photoLibrary
+            
+            //弹出控制器,显示界面
+            self.present(picker, animated: true, completion: nil)
+        }else{
+            let alert = UIAlertView.init(title: "读取相册错误!", message: nil, delegate: nil, cancelButtonTitle: "确定")
+            alert.show()
+        }
+    }
+    
+    //实现图片控制器代理方法
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        //查看info对象
+        print(info)
+        
+        //获取选择的原图
+        let originImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        //赋值，图片视图显示图片
+        personPic.image = originImage
+        
+        detect();
+        
+        //图片控制器退出
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    //取消图片控制器代理
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        //图片控制器退出
+        picker.dismiss(animated: true, completion: nil)
     }
     
     func detect() {

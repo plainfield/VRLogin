@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5728F7011D6B4D0A00014D42 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5728F7001D6B4D0A00014D42 /* CameraViewController.swift */; };
+		852735C91F0247F700214992 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 852735C81F0247F700214992 /* images */; };
 		CC2647FD1D6A9C2F00C9E5B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2647FC1D6A9C2F00C9E5B1 /* AppDelegate.swift */; };
 		CC2647FF1D6A9C2F00C9E5B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2647FE1D6A9C2F00C9E5B1 /* ViewController.swift */; };
 		CC2648021D6A9C2F00C9E5B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC2648001D6A9C2F00C9E5B1 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		5728F7001D6B4D0A00014D42 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		852735C81F0247F700214992 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		CC2647F91D6A9C2F00C9E5B1 /* Detector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Detector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2647FC1D6A9C2F00C9E5B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC2647FE1D6A9C2F00C9E5B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +42,7 @@
 		CC2647F01D6A9C2F00C9E5B1 = {
 			isa = PBXGroup;
 			children = (
+				852735C81F0247F700214992 /* images */,
 				CC2647FB1D6A9C2F00C9E5B1 /* Detector */,
 				CC2647FA1D6A9C2F00C9E5B1 /* Products */,
 			);
@@ -127,6 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				852735C91F0247F700214992 /* images in Resources */,
 				CC2648071D6A9C2F00C9E5B1 /* LaunchScreen.storyboard in Resources */,
 				CC2648041D6A9C2F00C9E5B1 /* Assets.xcassets in Resources */,
 				CC2648021D6A9C2F00C9E5B1 /* Main.storyboard in Resources */,
