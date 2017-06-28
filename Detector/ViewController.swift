@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreImage
+import MobileCoreServices
 
 class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     @IBOutlet weak var personPic: UIImageView!
@@ -31,7 +32,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             picker.delegate = self
             
             //设置媒体类型
-            //picker.mediaTypes = [kUTTypeImage as String,kUTTypeVideo as String]
+            picker.mediaTypes = [kUTTypeImage as String,kUTTypeVideo as String]
             
             //设置允许编辑
             picker.allowsEditing = true
@@ -42,8 +43,9 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             //弹出控制器,显示界面
             self.present(picker, animated: true, completion: nil)
         }else{
-            let alert = UIAlertView.init(title: "读取相册错误!", message: nil, delegate: nil, cancelButtonTitle: "确定")
-            alert.show()
+            print("读取相册错误!")
+            //let alert = UIAlertView.init(title: "读取相册错误!", message: nil, delegate: nil, cancelButtonTitle: "确定")
+            //alert.show()
         }
     }
     
