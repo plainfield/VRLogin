@@ -28,5 +28,13 @@ extension UIImage {
         let newImage:UIImage = UIImage.init(cgImage: outPutImage, scale: self.scale, orientation: self.imageOrientation)
         return newImage
     }
-
+    
+    func clipImage(rect: CGRect) -> UIImage {
+        let sourceImageRef: CGImage = self.cgImage!
+//        let newCGImage = CGImageCreateWithImageInRect(sourceImageRef, CGRect(x: 0, y: 0, width: size.width, height: size.height))!
+        let imageRef = self.cgImage!.cropping(to: rect)
+        let newImage = UIImage(cgImage: imageRef!, scale: self.scale, orientation: self.imageOrientation)
+//        let newImage = UIImage(cgImage: newCGImage)
+        return newImage
+    }
 }
