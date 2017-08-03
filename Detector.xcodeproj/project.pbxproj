@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		112EEB211F31938500176DE6 /* PhotoBrowsingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112EEB201F31938500176DE6 /* PhotoBrowsingCollectionViewController.swift */; };
+		112EEB251F31955C00176DE6 /* PhotoBrowsing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112EEB241F31955C00176DE6 /* PhotoBrowsing.storyboard */; };
+		112EEB271F31AC9800176DE6 /* PhotoBrowsingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112EEB261F31AC9800176DE6 /* PhotoBrowsingCell.swift */; };
 		11911B131F315C3700639026 /* UIImage+grey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11911B121F315C3700639026 /* UIImage+grey.swift */; };
 		5728F7011D6B4D0A00014D42 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5728F7001D6B4D0A00014D42 /* CameraViewController.swift */; };
 		852735C91F0247F700214992 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 852735C81F0247F700214992 /* images */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		112EEB201F31938500176DE6 /* PhotoBrowsingCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotoBrowsingCollectionViewController.swift; path = Detector/PhotoBrowsingCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
+		112EEB241F31955C00176DE6 /* PhotoBrowsing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoBrowsing.storyboard; sourceTree = "<group>"; };
+		112EEB261F31AC9800176DE6 /* PhotoBrowsingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowsingCell.swift; sourceTree = "<group>"; };
 		11911B121F315C3700639026 /* UIImage+grey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+grey.swift"; sourceTree = "<group>"; };
 		5728F7001D6B4D0A00014D42 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		852735C81F0247F700214992 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
@@ -72,6 +78,9 @@
 				11911B111F315BF900639026 /* Common */,
 				CC2647FC1D6A9C2F00C9E5B1 /* AppDelegate.swift */,
 				CC2647FE1D6A9C2F00C9E5B1 /* ViewController.swift */,
+				112EEB201F31938500176DE6 /* PhotoBrowsingCollectionViewController.swift */,
+				112EEB241F31955C00176DE6 /* PhotoBrowsing.storyboard */,
+				112EEB261F31AC9800176DE6 /* PhotoBrowsingCell.swift */,
 				CC2648001D6A9C2F00C9E5B1 /* Main.storyboard */,
 				5728F7001D6B4D0A00014D42 /* CameraViewController.swift */,
 				CC2648031D6A9C2F00C9E5B1 /* Assets.xcassets */,
@@ -142,6 +151,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				112EEB251F31955C00176DE6 /* PhotoBrowsing.storyboard in Resources */,
 				852735C91F0247F700214992 /* images in Resources */,
 				CC2648071D6A9C2F00C9E5B1 /* LaunchScreen.storyboard in Resources */,
 				CC2648041D6A9C2F00C9E5B1 /* Assets.xcassets in Resources */,
@@ -158,6 +168,8 @@
 			files = (
 				11911B131F315C3700639026 /* UIImage+grey.swift in Sources */,
 				CC2647FF1D6A9C2F00C9E5B1 /* ViewController.swift in Sources */,
+				112EEB211F31938500176DE6 /* PhotoBrowsingCollectionViewController.swift in Sources */,
+				112EEB271F31AC9800176DE6 /* PhotoBrowsingCell.swift in Sources */,
 				CC2647FD1D6A9C2F00C9E5B1 /* AppDelegate.swift in Sources */,
 				5728F7011D6B4D0A00014D42 /* CameraViewController.swift in Sources */,
 			);

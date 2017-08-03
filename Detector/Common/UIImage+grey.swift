@@ -29,12 +29,70 @@ extension UIImage {
         return newImage
     }
     
-    func clipImage(rect: CGRect) -> UIImage {
-        let sourceImageRef: CGImage = self.cgImage!
+    func clipImage(rect: CGRect?) -> UIImage? {
+        guard rect != nil else{
+            return nil
+        }
+//        let _: CGImage = self.cgImage!
 //        let newCGImage = CGImageCreateWithImageInRect(sourceImageRef, CGRect(x: 0, y: 0, width: size.width, height: size.height))!
-        let imageRef = self.cgImage!.cropping(to: rect)
+        let imageRef = self.cgImage!.cropping(to: rect!)
         let newImage = UIImage(cgImage: imageRef!, scale: self.scale, orientation: self.imageOrientation)
 //        let newImage = UIImage(cgImage: newCGImage)
         return newImage
+    }
+    
+    func faceBounds() -> [CGRect]? {
+        guard let personciImage = CIImage(image: self) else {
+            return nil
+        }
+        
+        let accuracy = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
+        let faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: accuracy)
+        let faces = faceDetector?.features(in: personciImage)
+        
+        // Convert Core Image Coordinate to UIView Coordinate
+        let ciImageSize = personciImage.extent.size
+        var transform = CGAffineTransform(scaleX: 1, y: -1)
+        transform = transform.translatedBy(x: 0, y: -ciImageSize.height)
+        
+        var faceRects = [CGRect]()
+        for face in faces as! [CIFaceFeature] {
+            
+            print("Found bounds are \(face.bounds)")
+            
+            // Apply the transform to convert the coordinates
+            var faceViewBounds = face.bounds.applying(transform)
+            
+            // Calculate the actual position and size of the rectangle in the image view
+            let viewSize = self.size
+            let scale = min(viewSize.width / ciImageSize.width,
+                            viewSize.height / ciImageSize.height)
+            let offsetX = (viewSize.width - ciImageSize.width * scale) / 2
+            let offsetY = (viewSize.height - ciImageSize.height * scale) / 2
+            
+            faceViewBounds = faceViewBounds.applying(CGAffineTransform(scaleX: scale, y: scale))
+            faceViewBounds.origin.x += offsetX
+            faceViewBounds.origin.y += offsetY
+            faceRects.append(faceViewBounds)
+            
+//            let faceBox = UIView(frame: faceViewBounds)
+//
+//            faceBox.layer.borderWidth = 3
+//            faceBox.layer.borderColor = UIColor.red.cgColor
+//            faceBox.backgroundColor = UIColor.clear
+//            personPic.addSubview(faceBox)
+            
+            if face.hasLeftEyePosition {
+                print("Left eye bounds are \(face.leftEyePosition)")
+            }
+            
+            if face.hasRightEyePosition {
+                print("Right eye bounds are \(face.rightEyePosition)")
+            }
+        }
+        if faceRects.count == 0 {
+            print("face detecting failed!")
+        }
+        return faceRects
     }
 }

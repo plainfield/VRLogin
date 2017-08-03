@@ -23,30 +23,30 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     @IBAction func btnAlbum(sender: AnyObject) {
         //判断是否支持要使用的图片库
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            
-            //初始化图片控制器
-            let picker = UIImagePickerController()
-            
-            //设置代理
-            picker.delegate = self
-            
-            //设置媒体类型
-            picker.mediaTypes = [kUTTypeImage as String,kUTTypeVideo as String]
-            
-            //设置允许编辑
-            picker.allowsEditing = true
-            
-            //指定图片控制器类型
-            picker.sourceType = .photoLibrary
-            
-            //弹出控制器,显示界面
-            self.present(picker, animated: true, completion: nil)
-        }else{
-            print("读取相册错误!")
-            //let alert = UIAlertView.init(title: "读取相册错误!", message: nil, delegate: nil, cancelButtonTitle: "确定")
-            //alert.show()
-        }
+//        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+//
+//            //初始化图片控制器
+//            let picker = UIImagePickerController()
+//
+//            //设置代理
+//            picker.delegate = self
+//
+//            //设置媒体类型
+//            picker.mediaTypes = [kUTTypeImage as String,kUTTypeVideo as String]
+//
+//            //设置允许编辑
+//            picker.allowsEditing = true
+//
+//            //指定图片控制器类型
+//            picker.sourceType = .photoLibrary
+//
+//            //弹出控制器,显示界面
+//            self.present(picker, animated: true, completion: nil)
+//        }else{
+//            print("读取相册错误!")
+//            //let alert = UIAlertView.init(title: "读取相册错误!", message: nil, delegate: nil, cancelButtonTitle: "确定")
+//            //alert.show()
+//        }
     }
     
     //实现图片控制器代理方法
