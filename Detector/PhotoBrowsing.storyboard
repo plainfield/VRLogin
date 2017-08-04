@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="EuL-7m-Jsi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="EuL-7m-Jsi">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,11 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="u4K-ty-Dgc">
-                            <size key="itemSize" width="70" height="70"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="4" minimumInteritemSpacing="2" id="u4K-ty-Dgc">
+                            <size key="itemSize" width="88" height="88"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="20" minY="40" maxX="20" maxY="20"/>
+                            <inset key="sectionInset" minX="5" minY="6" maxX="5" maxY="6"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoBrowsingCell" id="gC9-7x-JPu" customClass="PhotoBrowsingCell" customModule="Detector" customModuleProvider="target">
@@ -31,19 +31,34 @@
                                     <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CbQ-Yh-Pbk">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CbQ-Yh-Pbk">
                                             <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPg-Gn-EA0">
+                                            <rect key="frame" x="134" y="4" width="22" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="q3Y-kg-x1R"/>
+                                                <constraint firstAttribute="width" constant="22" id="sXp-mx-nV6"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="button_photo_normal"/>
+                                            <state key="selected" image="button_photo_selected"/>
+                                            <connections>
+                                                <action selector="selectButtonActionWithSender:" destination="Ooh-qM-lCj" eventType="touchUpInside" id="J0S-Nt-aJT"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </view>
                                 <constraints>
                                     <constraint firstItem="CbQ-Yh-Pbk" firstAttribute="leading" secondItem="gC9-7x-JPu" secondAttribute="leading" id="0wa-W0-3xp"/>
+                                    <constraint firstItem="YPg-Gn-EA0" firstAttribute="top" secondItem="gC9-7x-JPu" secondAttribute="top" constant="4" id="Q00-hb-t23"/>
                                     <constraint firstAttribute="bottom" secondItem="CbQ-Yh-Pbk" secondAttribute="bottom" id="RYk-wb-6m0"/>
+                                    <constraint firstAttribute="trailing" secondItem="YPg-Gn-EA0" secondAttribute="trailing" constant="4" id="SV0-4z-v7e"/>
                                     <constraint firstAttribute="trailing" secondItem="CbQ-Yh-Pbk" secondAttribute="trailing" id="l7a-5x-1Zf"/>
                                     <constraint firstItem="CbQ-Yh-Pbk" firstAttribute="top" secondItem="gC9-7x-JPu" secondAttribute="top" id="meq-hR-LeR"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="CbQ-Yh-Pbk" id="wO7-bw-6ug"/>
+                                    <outlet property="selectButton" destination="YPg-Gn-EA0" id="Gdg-RQ-P0v"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -88,4 +103,8 @@
             <point key="canvasLocation" x="108.8" y="105.24737631184409"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="button_photo_normal" width="22" height="22"/>
+        <image name="button_photo_selected" width="22" height="22"/>
+    </resources>
 </document>

@@ -84,8 +84,6 @@ class PhotoBrowsingCollectionViewController: UICollectionViewController {
             self.imageManager.requestImage(for: asset, targetSize: thumbnailSize,
                                            contentMode: PHImageContentMode.aspectFill,
                                            options: nil) { (image, nfo) in
-                                            //                                        (cell.contentView.viewWithTag(1) as! UIImageView).image = image
-                                            //                                        print(image)
                                             cell.imageView?.image = image
                                             
             }
@@ -99,8 +97,8 @@ class PhotoBrowsingCollectionViewController: UICollectionViewController {
         let asset = self.assetsFetchResults[indexPath.row]
         let selectedCell: PhotoBrowsingCell = collectionView.cellForItem(at: indexPath) as! PhotoBrowsingCell
         
-        selectedCell.isAdded = !selectedCell.isAdded
-        if (selectedCell.isAdded) {
+        selectedCell.selectButton?.isSelected = !(selectedCell.selectButton?.isSelected)!
+        if (selectedCell.selectButton?.isSelected)! {
             assetArray.append(asset)
         }
         else {
@@ -121,7 +119,25 @@ class PhotoBrowsingCollectionViewController: UICollectionViewController {
                 photos in
                 self.imageArray = photos
                 self.collectionView?.reloadData()
+//                self.navigationController?.dismiss(animated: true, completion: nil)
             })
+        }
+    }
+    
+    @IBAction func selectButtonAction(sender: UIButton) {
+        sender.isSelected = !(sender.isSelected)
+        
+        let selectedCell: UICollectionViewCell = sender.superview?.superview as! UICollectionViewCell
+        let indexPath = self.collectionView?.indexPath(for: selectedCell)
+        let asset = self.assetsFetchResults[(indexPath?.row)!]
+        
+        if sender.isSelected {
+            assetArray.append(asset)
+        }
+        else {
+            if assetArray.contains(asset) {
+                assetArray.remove(at: assetArray.index(of: asset)!)
+            }
         }
     }
     

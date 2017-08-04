@@ -10,5 +10,6 @@ import UIKit
 
 class PhotoBrowsingCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView?
+    @IBOutlet weak var selectButton: UIButton?
     open var isAdded: Bool = false
 }
