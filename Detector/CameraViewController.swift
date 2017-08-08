@@ -9,73 +9,118 @@
 //
 
 import UIKit
+import AVFoundation
 
-class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    @IBOutlet var imageView: UIImageView!
-    let imagePicker = UIImagePickerController()
+protocol FrameExtractorDelegate: class {
+    func captured(image: UIImage)
+}
 
+class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+
+    @IBOutlet var previewImageView: UIImageView?
+    @IBOutlet var snapshotImageView: UIImageView?
+    private let position = AVCaptureDevicePosition.front
+    private let quality = AVCaptureSessionPresetMedium
+    
+    private var permissionGranted = false
+    private let sessionQueue = DispatchQueue(label: "session queue")
+    private let captureSession = AVCaptureSession()
+    private let context = CIContext()
+    
+    weak var delegate: FrameExtractorDelegate?
+    
+    var capturePhotoTimer: Timer?
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        capturePhotoTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: {
+            timer in
+                let captureImage = self.previewImageView?.image
+                if let faceRects = captureImage?.faceBounds() {
+                    let faceImages = faceRects.map {
+                        return captureImage?.clipImage(rect: $0)
+                    }
+                    if faceImages.count > 0 {
+                        print("detect the face!!! face count = \(faceImages.count)")
+                        self.snapshotImageView?.image = faceImages.first!
+//                        self.capturePhotoTimer?.invalidate()
+                    }
+                }
+            })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        capturePhotoTimer?.invalidate()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePicker.delegate = self
-    }
-    
-    @IBAction func takePhoto(_ sender: AnyObject) {
         
-        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
-            return
-        }
-        
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .camera
-        
-        present(imagePicker, animated: true, completion: nil)
-    }
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imageView.contentMode = .scaleAspectFit
-            imageView.image = pickedImage
-        }
-        
-        dismiss(animated: true, completion: nil)
-        self.detect()
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func detect() {
-        let imageOptions =  NSDictionary(object: NSNumber(value: 5) as NSNumber, forKey: CIDetectorImageOrientation as NSString)
-        let personciImage = CIImage(cgImage: imageView.image!.cgImage!)
-        let accuracy = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
-        let faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: accuracy)
-        let faces = faceDetector?.features(in: personciImage, options: imageOptions as? [String : AnyObject])
-        
-        if let face = faces?.first as? CIFaceFeature {
-            print("found bounds are \(face.bounds)")
-            
-            let alert = UIAlertController(title: "Say Cheese!", message: "We detected a face!", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            
-            if face.hasSmile {
-                print("face is smiling");
-            }
-            
-            if face.hasLeftEyePosition {
-                print("Left eye bounds are \(face.leftEyePosition)")
-            }
-            
-            if face.hasRightEyePosition {
-                print("Right eye bounds are \(face.rightEyePosition)")
-            }
-        } else {
-            let alert = UIAlertController(title: "No Face!", message: "No face was detected", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+        checkPermission()
+        sessionQueue.async { [unowned self] in
+            self.configureSession()
+            self.captureSession.startRunning()
         }
     }
     
+    // MARK: AVSession configuration
+    private func checkPermission() {
+        switch AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) {
+        case .authorized:
+            permissionGranted = true
+        case .notDetermined:
+            requestPermission()
+        default:
+            permissionGranted = false
+        }
+    }
+    
+    private func requestPermission() {
+        sessionQueue.suspend()
+        AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { [unowned self] granted in
+            self.permissionGranted = granted
+            self.sessionQueue.resume()
+        }
+    }
+    
+    private func configureSession() {
+        guard permissionGranted else { return }
+        captureSession.sessionPreset = quality
+        guard let captureDevice = selectCaptureDevice() else { return }
+        guard let captureDeviceInput = try? AVCaptureDeviceInput(device: captureDevice) else { return }
+        guard captureSession.canAddInput(captureDeviceInput) else { return }
+        captureSession.addInput(captureDeviceInput)
+        let videoOutput = AVCaptureVideoDataOutput()
+        videoOutput.setSampleBufferDelegate(self as AVCaptureVideoDataOutputSampleBufferDelegate, queue: DispatchQueue(label: "sample buffer"))
+        guard captureSession.canAddOutput(videoOutput) else { return }
+        captureSession.addOutput(videoOutput)
+        guard let connection = videoOutput.connection(withMediaType: AVFoundation.AVMediaTypeVideo) else { return }
+        guard connection.isVideoOrientationSupported else { return }
+        guard connection.isVideoMirroringSupported else { return }
+        connection.videoOrientation = .portrait
+        connection.isVideoMirrored = position == .front
+    }
+    
+    private func selectCaptureDevice() -> AVCaptureDevice? {
+        return AVCaptureDevice.devices().filter {
+            ($0 as AnyObject).hasMediaType(AVMediaTypeVideo) &&
+                ($0 as AnyObject).position == position
+            }.first as? AVCaptureDevice
+    }
+    
+    // MARK: Sample buffer to UIImage conversion
+    private func imageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
+        guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
+        let ciImage = CIImage(cvPixelBuffer: imageBuffer)
+        guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return nil }
+        return UIImage(cgImage: cgImage)
+    }
+    
+    // MARK: AVCaptureVideoDataOutputSampleBufferDelegate
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+        guard let uiImage = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
+        DispatchQueue.main.async { [unowned self] in
+            self.delegate?.captured(image: uiImage)
+            self.previewImageView?.image = uiImage
+        }
+    }
 }
