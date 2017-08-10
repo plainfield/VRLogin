@@ -9,6 +9,9 @@
 import UIKit
 import Photos
 
+//https://stackoverflow.com/questions/39970273/no-such-module-in-xcode
+import Zip
+
 private let reuseIdentifier = "PhotoBrowsingCell"
 
 class PhotoBrowsingCollectionViewController: UICollectionViewController {
@@ -120,6 +123,11 @@ class PhotoBrowsingCollectionViewController: UICollectionViewController {
                 self.imageArray = photos
                 self.collectionView?.reloadData()
 //                self.navigationController?.dismiss(animated: true, completion: nil)
+                // save images to DocumentsDirectory
+                self.imageArray.forEach {
+                    $0.saveToFiles(name: "111")
+                }
+                self.zipImages()
             })
         }
     }
@@ -165,12 +173,70 @@ class PhotoBrowsingCollectionViewController: UICollectionViewController {
                 let greyImage = faceImage?.grayImage()
                 if let image = greyImage {
                     photos.append(image)
-                    dispatchGroup.leave()
                 }
+                dispatchGroup.leave()
             })
         }
         dispatchGroup.notify(queue: DispatchQueue.main) {
             completion(photos)
         }
     }
+    
+    func getAllImagePaths(_ dirPath: String) -> [URL]? {
+        var filePaths = [URL]()
+        do {
+            let array = try FileManager.default.contentsOfDirectory(atPath: dirPath)
+            for fileName in array { var isDir: ObjCBool = true
+                let fullPath = "\(dirPath)/\(fileName)"
+                if FileManager.default.fileExists(atPath: fullPath, isDirectory: &isDir) {
+                    if !isDir.boolValue {
+                        filePaths.append(URL.init(string: fullPath)!)
+                    }
+                }
+            }
+        }
+        catch let error as NSError {
+            print("get file path error: \(error)")
+        }
+        return filePaths;
+    }
+
+    func zipImages() {
+        
+        let ducumentPath = NSHomeDirectory() + "/Documents"
+        let urlPaths = getAllImagePaths(ducumentPath)
+        
+        do {
+            let _ = try Zip.quickZipFiles(urlPaths!, fileName: "Images")
+            let zipFilePath = ducumentPath + "/Images.zip"
+            let data = NSData(contentsOfFile: zipFilePath)
+            print("zip data is \(String(describing: data))")
+            
+        } catch {
+            print("ERROR")
+        }
+        deleteFiles()
+    }
+
+    func deleteFiles() {
+        let ducumentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as URL
+        //        let filename = documentsDirectory.appendingPathComponent("tempImages")
+        try? FileManager.default.removeItem(at: ducumentUrl)
+    }
+    
+//    private func getAllPhotos() {
+//        //  注意点！！-这里必须注册通知，不然第一次运行程序时获取不到图片，以后运行会正常显示。体验方式：每次运行项目时修改一下 Bundle Identifier，就可以看到效果。
+//        PHPhotoLibrary.shared().register(self as PHPhotoLibraryChangeObserver)
+//        //  获取所有系统图片信息集合体
+//        let allOptions = PHFetchOptions()
+//        //  对内部元素排序，按照时间由远到近排序
+//        allOptions.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
+//        //  将元素集合拆解开，此时 allResults 内部是一个个的PHAsset单元
+//        let allResults = PHAsset.fetchAssets(with: allOptions)
+//        print(allResults.count)
+//    }
+//    
+//    func photoLibraryDidChange(_ changeInstance: PHChange) {
+//        getAllPhotos()
+//    }
 }

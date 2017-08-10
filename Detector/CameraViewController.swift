@@ -41,6 +41,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                     }
                     if faceImages.count > 0 {
                         print("detect the face!!! face count = \(faceImages.count)")
+                        
                         self.snapshotImageView?.image = faceImages.first!
 //                        self.capturePhotoTimer?.invalidate()
                     }

@@ -9,6 +9,7 @@
 import UIKit
 import CoreImage
 import MobileCoreServices
+import Photos
 
 class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     @IBOutlet weak var personPic: UIImageView!
@@ -19,35 +20,21 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         personPic.image = UIImage(named: "face-1")
 
         detect()
+        
+        //则获取所有资源
+        let allPhotosOptions = PHFetchOptions()
+        //按照创建时间倒序排列
+        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate",
+                                                             ascending: false)]
+        //只获取图片
+        allPhotosOptions.predicate = NSPredicate(format: "mediaType = %d",
+                                                 PHAssetMediaType.image.rawValue)
+        PHAsset.fetchAssets(with: PHAssetMediaType.image,
+                                                 options: allPhotosOptions)
     }
     
     @IBAction func btnAlbum(sender: AnyObject) {
-        //判断是否支持要使用的图片库
-//        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-//
-//            //初始化图片控制器
-//            let picker = UIImagePickerController()
-//
-//            //设置代理
-//            picker.delegate = self
-//
-//            //设置媒体类型
-//            picker.mediaTypes = [kUTTypeImage as String,kUTTypeVideo as String]
-//
-//            //设置允许编辑
-//            picker.allowsEditing = true
-//
-//            //指定图片控制器类型
-//            picker.sourceType = .photoLibrary
-//
-//            //弹出控制器,显示界面
-//            self.present(picker, animated: true, completion: nil)
-//        }else{
-//            print("读取相册错误!")
-//            //let alert = UIAlertView.init(title: "读取相册错误!", message: nil, delegate: nil, cancelButtonTitle: "确定")
-//            //alert.show()
-//        }
-    }
+     }
     
     //实现图片控制器代理方法
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

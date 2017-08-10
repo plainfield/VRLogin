@@ -91,8 +91,21 @@ extension UIImage {
             }
         }
         if faceRects.count == 0 {
-            print("face detecting failed!")
+        print("face detecting failed!")
         }
         return faceRects
+    }
+    
+    func saveToFiles(name: String) {
+        if let data = UIImagePNGRepresentation(self) {
+            let ducumentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as URL
+            let filename = ducumentPath.appendingPathComponent(name).path
+            do {
+                try data.write(to: URL(fileURLWithPath: filename), options: [])
+            }
+            catch let error as NSError {
+                print("get file path error: \(error)")
+            }
+        }
     }
 }

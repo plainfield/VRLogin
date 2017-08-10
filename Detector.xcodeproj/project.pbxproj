@@ -11,6 +11,7 @@
 		112EEB251F31955C00176DE6 /* PhotoBrowsing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112EEB241F31955C00176DE6 /* PhotoBrowsing.storyboard */; };
 		112EEB271F31AC9800176DE6 /* PhotoBrowsingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112EEB261F31AC9800176DE6 /* PhotoBrowsingCell.swift */; };
 		11911B131F315C3700639026 /* UIImage+grey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11911B121F315C3700639026 /* UIImage+grey.swift */; };
+		11DA833A1F39850200E88C74 /* Pods_Detector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B34277B8335242C0506F8E68 /* Pods_Detector.framework */; };
 		5728F7011D6B4D0A00014D42 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5728F7001D6B4D0A00014D42 /* CameraViewController.swift */; };
 		852735C91F0247F700214992 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 852735C81F0247F700214992 /* images */; };
 		CC2647FD1D6A9C2F00C9E5B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2647FC1D6A9C2F00C9E5B1 /* AppDelegate.swift */; };
@@ -25,8 +26,12 @@
 		112EEB241F31955C00176DE6 /* PhotoBrowsing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoBrowsing.storyboard; sourceTree = "<group>"; };
 		112EEB261F31AC9800176DE6 /* PhotoBrowsingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowsingCell.swift; sourceTree = "<group>"; };
 		11911B121F315C3700639026 /* UIImage+grey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+grey.swift"; sourceTree = "<group>"; };
+		11DA833B1F39850300E88C74 /* Zip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zip.framework; path = "../../../Library/Developer/Xcode/DerivedData/Detector-babqsmkiwzmbxnfrgnrfxvulnson/Build/Products/Debug-iphoneos/Zip/Zip.framework"; sourceTree = "<group>"; };
+		546D30A07B6D0C2108F54592 /* Pods-Detector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Detector.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Detector/Pods-Detector.debug.xcconfig"; sourceTree = "<group>"; };
 		5728F7001D6B4D0A00014D42 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		852735C81F0247F700214992 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		9624618615297BB8A56CF335 /* Pods-Detector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Detector.release.xcconfig"; path = "Pods/Target Support Files/Pods-Detector/Pods-Detector.release.xcconfig"; sourceTree = "<group>"; };
+		B34277B8335242C0506F8E68 /* Pods_Detector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Detector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2647F91D6A9C2F00C9E5B1 /* Detector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Detector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2647FC1D6A9C2F00C9E5B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC2647FE1D6A9C2F00C9E5B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11DA833A1F39850200E88C74 /* Pods_Detector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,12 +61,32 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		272D6C85FF72152D9E6BCC90 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				11DA833B1F39850300E88C74 /* Zip.framework */,
+				B34277B8335242C0506F8E68 /* Pods_Detector.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C286FC8BF3A9182743A96CD7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				546D30A07B6D0C2108F54592 /* Pods-Detector.debug.xcconfig */,
+				9624618615297BB8A56CF335 /* Pods-Detector.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CC2647F01D6A9C2F00C9E5B1 = {
 			isa = PBXGroup;
 			children = (
 				852735C81F0247F700214992 /* images */,
 				CC2647FB1D6A9C2F00C9E5B1 /* Detector */,
 				CC2647FA1D6A9C2F00C9E5B1 /* Products */,
+				C286FC8BF3A9182743A96CD7 /* Pods */,
+				272D6C85FF72152D9E6BCC90 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,9 +123,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC26480B1D6A9C2F00C9E5B1 /* Build configuration list for PBXNativeTarget "Detector" */;
 			buildPhases = (
+				7F9D658E5497A805D3A8A53C /* [CP] Check Pods Manifest.lock */,
 				CC2647F51D6A9C2F00C9E5B1 /* Sources */,
 				CC2647F61D6A9C2F00C9E5B1 /* Frameworks */,
 				CC2647F71D6A9C2F00C9E5B1 /* Resources */,
+				A51049BA721D3502DDABD6D1 /* [CP] Embed Pods Frameworks */,
+				21DD8A4D1D3F315942FD7BAC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -160,6 +189,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		21DD8A4D1D3F315942FD7BAC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Detector/Pods-Detector-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F9D658E5497A805D3A8A53C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A51049BA721D3502DDABD6D1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Detector/Pods-Detector-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CC2647F51D6A9C2F00C9E5B1 /* Sources */ = {
@@ -289,9 +366,18 @@
 		};
 		CC26480C1D6A9C2F00C9E5B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 546D30A07B6D0C2108F54592 /* Pods-Detector.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = PP64RT7P8Z;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"(non-recursive)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"(non-recursive)",
+					"$(SRCROOT)",
+					"(recursive)",
+				);
 				INFOPLIST_FILE = Detector/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -305,12 +391,22 @@
 		};
 		CC26480D1D6A9C2F00C9E5B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9624618615297BB8A56CF335 /* Pods-Detector.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"(non-recursive)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"(non-recursive)",
+					"$(SRCROOT)",
+					"(recursive)",
+				);
 				INFOPLIST_FILE = Detector/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mzy.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
