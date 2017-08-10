@@ -10,6 +10,7 @@
 		112EEB211F31938500176DE6 /* PhotoBrowsingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112EEB201F31938500176DE6 /* PhotoBrowsingCollectionViewController.swift */; };
 		112EEB251F31955C00176DE6 /* PhotoBrowsing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112EEB241F31955C00176DE6 /* PhotoBrowsing.storyboard */; };
 		112EEB271F31AC9800176DE6 /* PhotoBrowsingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112EEB261F31AC9800176DE6 /* PhotoBrowsingCell.swift */; };
+		11585DC11F3BF60000F46CF5 /* FrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11585DC01F3BF60000F46CF5 /* FrameExtractor.swift */; };
 		11911B131F315C3700639026 /* UIImage+grey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11911B121F315C3700639026 /* UIImage+grey.swift */; };
 		11DA833A1F39850200E88C74 /* Pods_Detector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B34277B8335242C0506F8E68 /* Pods_Detector.framework */; };
 		5728F7011D6B4D0A00014D42 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5728F7001D6B4D0A00014D42 /* CameraViewController.swift */; };
@@ -25,6 +26,7 @@
 		112EEB201F31938500176DE6 /* PhotoBrowsingCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotoBrowsingCollectionViewController.swift; path = Detector/PhotoBrowsingCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
 		112EEB241F31955C00176DE6 /* PhotoBrowsing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoBrowsing.storyboard; sourceTree = "<group>"; };
 		112EEB261F31AC9800176DE6 /* PhotoBrowsingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowsingCell.swift; sourceTree = "<group>"; };
+		11585DC01F3BF60000F46CF5 /* FrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameExtractor.swift; sourceTree = "<group>"; };
 		11911B121F315C3700639026 /* UIImage+grey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+grey.swift"; sourceTree = "<group>"; };
 		11DA833B1F39850300E88C74 /* Zip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zip.framework; path = "../../../Library/Developer/Xcode/DerivedData/Detector-babqsmkiwzmbxnfrgnrfxvulnson/Build/Products/Debug-iphoneos/Zip/Zip.framework"; sourceTree = "<group>"; };
 		546D30A07B6D0C2108F54592 /* Pods-Detector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Detector.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Detector/Pods-Detector.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				11911B111F315BF900639026 /* Common */,
 				CC2647FC1D6A9C2F00C9E5B1 /* AppDelegate.swift */,
 				CC2647FE1D6A9C2F00C9E5B1 /* ViewController.swift */,
+				11585DC01F3BF60000F46CF5 /* FrameExtractor.swift */,
 				112EEB201F31938500176DE6 /* PhotoBrowsingCollectionViewController.swift */,
 				112EEB241F31955C00176DE6 /* PhotoBrowsing.storyboard */,
 				112EEB261F31AC9800176DE6 /* PhotoBrowsingCell.swift */,
@@ -246,6 +249,7 @@
 				11911B131F315C3700639026 /* UIImage+grey.swift in Sources */,
 				CC2647FF1D6A9C2F00C9E5B1 /* ViewController.swift in Sources */,
 				112EEB211F31938500176DE6 /* PhotoBrowsingCollectionViewController.swift in Sources */,
+				11585DC11F3BF60000F46CF5 /* FrameExtractor.swift in Sources */,
 				112EEB271F31AC9800176DE6 /* PhotoBrowsingCell.swift in Sources */,
 				CC2647FD1D6A9C2F00C9E5B1 /* AppDelegate.swift in Sources */,
 				5728F7011D6B4D0A00014D42 /* CameraViewController.swift in Sources */,
