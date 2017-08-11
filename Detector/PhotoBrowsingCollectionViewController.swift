@@ -23,7 +23,7 @@ class PhotoBrowsingCollectionViewController: UICollectionViewController {
     var thumbnailSize:CGSize!
     
     var assetArray = [PHAsset]()
-    var imageArray = [UIImage]()
+    var imageArray = [(UIImage, String)]()
     
     let photosCount = 0
     
@@ -78,7 +78,7 @@ class PhotoBrowsingCollectionViewController: UICollectionViewController {
         let cell: PhotoBrowsingCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoBrowsingCell
         
         if imageArray.count > 0 {
-            cell.imageView?.image = imageArray[indexPath.row]
+            cell.imageView?.image = imageArray[indexPath.row].0
         }
         else {
             // Configure the cell
@@ -125,7 +125,7 @@ class PhotoBrowsingCollectionViewController: UICollectionViewController {
 //                self.navigationController?.dismiss(animated: true, completion: nil)
                 // save images to DocumentsDirectory
                 self.imageArray.forEach {
-                    $0.saveToFiles(name: "111")
+                    $0.0.saveToFiles(name: $0.1)
                 }
                 self.zipImages()
             })
@@ -149,13 +149,14 @@ class PhotoBrowsingCollectionViewController: UICollectionViewController {
         }
     }
     
-    func requestImages(by assets:[PHAsset], completion:@escaping ([UIImage]) -> Void) {
+    func requestImages(by assets:[PHAsset], completion:@escaping ([(UIImage, String)]) -> Void) {
         
-        var photos = [UIImage]()
+        var photos = [(UIImage, String)]()
         
         let dispatchGroup = DispatchGroup()
         assetArray.forEach {
             
+            let asset = $0
             dispatchGroup.enter()
             
             let options = PHImageRequestOptions()
@@ -168,11 +169,14 @@ class PhotoBrowsingCollectionViewController: UICollectionViewController {
 //            }
             PHImageManager.default().requestImage(for: $0, targetSize:thumbnailSize, contentMode: PHImageContentMode.aspectFill, options: options, resultHandler: {
                 (image, info) in
+
                 let faceRect = image?.faceBounds()
                 let faceImage = image?.clipImage(rect: faceRect?.first)
                 let greyImage = faceImage?.grayImage()
                 if let image = greyImage {
-                    photos.append(image)
+                    let dateString = asset.creationDate?.description
+                    let dateStringNoSpace = dateString?.replacingOccurrences(of: " ", with: "")
+                    photos.append((image, dateStringNoSpace!))
                 }
                 dispatchGroup.leave()
             })
@@ -190,7 +194,7 @@ class PhotoBrowsingCollectionViewController: UICollectionViewController {
                 let fullPath = "\(dirPath)/\(fileName)"
                 if FileManager.default.fileExists(atPath: fullPath, isDirectory: &isDir) {
                     if !isDir.boolValue {
-                        filePaths.append(URL.init(string: fullPath)!)
+                        filePaths.append(URL(fileURLWithPath: fullPath))
                     }
                 }
             }
@@ -223,20 +227,4 @@ class PhotoBrowsingCollectionViewController: UICollectionViewController {
         //        let filename = documentsDirectory.appendingPathComponent("tempImages")
         try? FileManager.default.removeItem(at: ducumentUrl)
     }
-    
-//    private func getAllPhotos() {
-//        //  注意点！！-这里必须注册通知，不然第一次运行程序时获取不到图片，以后运行会正常显示。体验方式：每次运行项目时修改一下 Bundle Identifier，就可以看到效果。
-//        PHPhotoLibrary.shared().register(self as PHPhotoLibraryChangeObserver)
-//        //  获取所有系统图片信息集合体
-//        let allOptions = PHFetchOptions()
-//        //  对内部元素排序，按照时间由远到近排序
-//        allOptions.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
-//        //  将元素集合拆解开，此时 allResults 内部是一个个的PHAsset单元
-//        let allResults = PHAsset.fetchAssets(with: allOptions)
-//        print(allResults.count)
-//    }
-//    
-//    func photoLibraryDidChange(_ changeInstance: PHChange) {
-//        getAllPhotos()
-//    }
 }

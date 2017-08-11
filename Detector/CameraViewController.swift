@@ -15,16 +15,10 @@ class CameraViewController: UIViewController, FrameExtractorDelegate {
 
     @IBOutlet var previewImageView: UIImageView?
     @IBOutlet var snapshotImageView: UIImageView?
-    private let position = AVCaptureDevicePosition.front
-    private let quality = AVCaptureSessionPresetMedium
     
-    private var permissionGranted = false
-    private let sessionQueue = DispatchQueue(label: "session queue")
-    private let captureSession = AVCaptureSession()
-    private let context = CIContext()
     private var frameExtractor: FrameExtractor!
+    private var capturePhotoTimer: Timer?
     
-    var capturePhotoTimer: Timer?
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         capturePhotoTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: {
